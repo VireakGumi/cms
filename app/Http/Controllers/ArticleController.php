@@ -43,6 +43,7 @@ class ArticleController extends Controller
         $article->title = $req->input("title");
         $article->content = $req->input("content");
         $article->category_id = $req->input("category_id");
+        $article->photo = 'no_image.jpg';
         // $article->user_id = $req->input("user_id");
 
         if ($req->hasFile("photo")) {
@@ -107,9 +108,10 @@ class ArticleController extends Controller
         $article->content = $req->input("content");
         $article->category_id = $req->input("category_id");
         // $article->user_id = $req->input("user_id");
-
         if ($req->hasFile("photo")) {
-            Storage::disk('public')->delete("/photos" . "/" . $article->photo);
+            if ($article->photo != 'no_image.jpg') {
+                Storage::disk('public')->delete("/photos" . "/" . $article->photo);
+            }
             $photo = $req->file("photo");
             $file_content = file_get_contents($photo->getPathName());
             $fileName = $photo->hashName();

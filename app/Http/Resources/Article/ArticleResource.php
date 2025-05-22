@@ -19,7 +19,7 @@ class ArticleResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'content' => $this->content,
-            'photo' => asset('storage/photos', $this->photo),
+            'photo' => asset('storage/photos/' . $this->photo),
             'category_id' => [
                 'id' => $this->category->id,
                 'name' => $this->category->name
